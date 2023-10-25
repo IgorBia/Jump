@@ -1,12 +1,15 @@
 //Global values
-var tabId, windowId;
+var tabId, windowId, workspaceId;
 
 
 //Function that writes id's of tab and window always when tab's loaded.
 async function setVariables(activeInfo){	
 	tabId =activeInfo.tabId;
 	windowId=activeInfo.windowId;
-	console.log("setting...\n\ntabId = " + tabId + "\nwindowId = " + windowId + "\n\n")
+	chrome.tabs.get(tabId, function(tab){
+		workspaceId = tab.workspaceId;
+	});
+	console.log("setting...\n\ntabId = " + tabId + "\nwindowId = " + windowId + "\nworkspaceId:" + workspaceId + "\n\n");
 }
 
 //Function that's responsible for whole logic - it gets all opened windows and moves the tab to other window.
@@ -19,6 +22,9 @@ async function leapTab() {
 			if (!isActive) {
 				console.log("Values...\n\ntabId = " + tabId + "\nwindowId = " + windowId + "\n\n")
 				chrome.tabs.move(tabId,{index: -1,windowId:currentWindow.id}); //Moving tab at last position.
+				chrome.tabs.get(tabId, function(tab){
+					tab.workspaceId=(workspaceId+1)%3;
+				});
 				break;	//If moved - end of work, job done.
 			}
 		}
@@ -28,4 +34,3 @@ async function leapTab() {
 //Setting required event listeners.
 chrome.tabs.onActivated.addListener(setVariables);
 chrome.action.onClicked.addListener(leapTab);
-
