@@ -4,10 +4,11 @@
   "version": "1.0.0",
   "description": "Helps you to organize work when you have more than one opened windows of Opera.",
   "icons": {
+    "16": "jump_16.png",
     "48": "jump_48.png",
     "128": "jump_128.png"
   },
-  "permissions": ["tabs"],
+  "permissions": ["tabs","contextMenus"],
   "background": {
     "service_worker": "background.js"
   },

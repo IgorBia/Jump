@@ -10,7 +10,7 @@ async function setVariables(activeInfo){
 }
 
 //Function that's responsible for whole logic - it gets all opened windows and moves the tab to other window.
-async function moveToFirstPosition() {
+async function leapTab() {
 	chrome.windows.getAll({}, function (windows) {
 		for (var i = 0; i < windows.length; i++) {
 			var currentWindow = windows[i];
@@ -27,5 +27,5 @@ async function moveToFirstPosition() {
 
 //Setting required event listeners.
 chrome.tabs.onActivated.addListener(setVariables);
-chrome.action.onClicked.addListener(moveToFirstPosition);
+chrome.action.onClicked.addListener(leapTab);
 
