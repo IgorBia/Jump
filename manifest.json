@@ -1,0 +1,19 @@
+
+{
+  "name": "leap",
+  "version": "1.0.0",
+  "description": "Helps you to organize work when you have more than one opened windows of Opera.",
+  "icons": {
+    "48": "jump_48.png",
+    "128": "jump_128.png"
+  },
+  "permissions": ["tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": "jump_128.png",
+    "default_title": "leap"
+  },
+  "manifest_version": 3
+}
