@@ -14,7 +14,8 @@
   },
   "action": {
     "default_icon": "jump_128.png",
-    "default_title": "leap"
+    "default_title": "leap",
+    "default_popup": "popup.html"
   },
   "manifest_version": 3
 }
