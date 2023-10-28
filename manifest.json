@@ -8,9 +8,9 @@
     "48": "jump_48.png",
     "128": "jump_128.png"
   },
-  "permissions": ["tabs","contextMenus"],
+  "permissions": ["tabs","contextMenus", "storage"],
   "background": {
-    "service_worker": "background.js"
+    "service_worker":"background.js"
   },
   "action": {
     "default_icon": "jump_128.png",
