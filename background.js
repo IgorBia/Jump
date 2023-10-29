@@ -9,11 +9,12 @@ async function setVariables(activeInfo){
 	chrome.tabs.get(data.tabId, function(tab){
 		data.groupId=tab.groupId;
 	});
-	console(data.previousGroupId);
+	console.log(data.previousGroupId);
 }
 
 
 async function getGroups(windowId, title){
+	console.log("title: " + title);
 	return new Promise((resolve) => {
 		chrome.tabGroups.query({ windowId: windowId, title: title }, function (result) {
             resolve(result);
@@ -57,10 +58,12 @@ chrome.tabs.onActivated.addListener(function(activeInfo){
 });
 
 chrome.tabs.onCreated.addListener(function(newTab){
-	moveToWorkspace(newTab, newTab.windowId, data.previousGroupId);
+	console.log("moving tab " + newTab.tabId + " to " + data.previousGroupId);
+	chrome.tabs.group({tabIds: newTab.id, groupId: data.groupId});
 })
 
 chrome.storage.onChanged.addListener(function(changes){
+	console.log("group name: " + data.workspaceId)
 	if (changes.workspaceId) {data.workspaceId=changes.workspaceId.newValue;}
     leapTab(data.workspaceId);
     });
