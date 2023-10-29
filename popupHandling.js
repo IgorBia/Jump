@@ -1,5 +1,8 @@
+let counter = 0;
+
 async function sendRequest(wKSpid){
-    chrome.storage.session.set({workspaceId: wKSpid});
+    counter+=1;
+    chrome.storage.session.set({workspaceId: wKSpid, count: counter});
 }
 
 document.getElementById("Basic").addEventListener("click", function() {

@@ -1,13 +1,15 @@
 //Global values
-var data={};
+var data={previousGroupId: -1};
 
 //Function that writes id's of tab and window always when tab's loaded.
-async function setVariables(activeInfo){	
+async function setVariables(activeInfo){
+	data.previousGroupId=data.groupId;	
     data.tabId=activeInfo.tabId;
     data.windowId=activeInfo.windowId;
 	chrome.tabs.get(data.tabId, function(tab){
 		data.groupId=tab.groupId;
 	});
+	console(data.previousGroupId);
 }
 
 
@@ -25,7 +27,6 @@ async function collapseNonActive(){
 			for (var i = 0; i < result.length; i++) {
 				if (result[i].id!=data.groupId) {
 					 chrome.tabGroups.update(result[i].id, {collapsed: true});
-					 console.log("collapsed: " + result[i].title);
 				}
 			}
 		});
@@ -54,6 +55,12 @@ chrome.tabs.onActivated.addListener(function(activeInfo){
 	setVariables(activeInfo);
 	setTimeout(collapseNonActive, 100);
 });
+
+chrome.tabs.onCreated.addListener(function(newTab){
+	moveToWorkspace(newTab, newTab.windowId, data.previousGroupId);
+})
+
 chrome.storage.onChanged.addListener(function(changes){
-    leapTab(changes.workspaceId.newValue);
+	if (changes.workspaceId) {data.workspaceId=changes.workspaceId.newValue;}
+    leapTab(data.workspaceId);
     });
