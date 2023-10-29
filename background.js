@@ -20,7 +20,7 @@ async function getGroups(windowId, title){
 async function moveToWorkspace(tab, toWindow, wSId){
 	getGroups(toWindow.id, wSId)
 		.then(groupId => {
-			chrome.tabs.group({tabIds: tab.tabId, groupId: groupId}, function(grup){console.log("added grub\n"+grup)});
+			chrome.tabs.group({tabIds: tab.tabId, groupId: groupId});
 		})
 }
 
