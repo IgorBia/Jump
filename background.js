@@ -1,20 +1,20 @@
 //Global values
-var data={previousGroupId: -1};
+var data={groupId: -1};
 
 //Function that writes id's of tab and window always when tab's loaded.
 async function setVariables(activeInfo){
-	data.previousGroupId=data.groupId;	
-    data.tabId=activeInfo.tabId;
-    data.windowId=activeInfo.windowId;
+	data = {
+		previousGroupId: data.groupId,
+		tabId: activeInfo.tabId,
+		windowId: activeInfo.windowId
+	}
 	chrome.tabs.get(data.tabId, function(tab){
 		data.groupId=tab.groupId;
 	});
-	console.log(data.previousGroupId);
 }
 
 
 async function getGroups(windowId, title){
-	console.log("title: " + title);
 	return new Promise((resolve) => {
 		chrome.tabGroups.query({ windowId: windowId, title: title }, function (result) {
             resolve(result);
@@ -45,7 +45,7 @@ async function leapTab(wKSId) {
 	chrome.windows.getAll({}, async function (windows) {
 		for (var i = 0; i < windows.length; i++) {
 			if (windows[i].id!=data.windowId) {
-				 moveToWorkspace(data, windows[i], wKSId);
+				moveToWorkspace(data, windows[i], wKSId);
 				break;	//If moved - end of work, job done.
 			}
 		}
@@ -58,12 +58,10 @@ chrome.tabs.onActivated.addListener(function(activeInfo){
 });
 
 chrome.tabs.onCreated.addListener(function(newTab){
-	console.log("moving tab " + newTab.tabId + " to " + data.previousGroupId);
 	chrome.tabs.group({tabIds: newTab.id, groupId: data.groupId});
 })
 
 chrome.storage.onChanged.addListener(function(changes){
-	console.log("group name: " + data.workspaceId)
-	if (changes.workspaceId) {data.workspaceId=changes.workspaceId.newValue;}
-    leapTab(data.workspaceId);
+    leapTab(changes.workspaceId.newValue);
+	chrome.storage.session.set({workspaceId: ""});
     });
