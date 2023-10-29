@@ -3,12 +3,12 @@ async function sendRequest(wKSpid){
 }
 
 document.getElementById("Basic").addEventListener("click", function() {
-    sendRequest(0);
+    sendRequest("Basic");
 });
 
 document.getElementById("Uni").addEventListener("click", function() {
-    sendRequest(1);
+    sendRequest("Uni");
 });
 document.getElementById("Inn").addEventListener("click", function() {
-    sendRequest(2);
+    sendRequest("Inn");
 });
