@@ -1,31 +1,42 @@
 //Global values
-var tabId, windowId;
-
+var data={};
 
 //Function that writes id's of tab and window always when tab's loaded.
 async function setVariables(activeInfo){	
-	tabId =activeInfo.tabId;
-	windowId=activeInfo.windowId;
-	console.log("setting...\n\ntabId = " + tabId + "\nwindowId = " + windowId + "\n\n")
+    data.tabId=activeInfo.tabId;
+    data.windowId=activeInfo.windowId;
+}
+
+
+async function getGroups(windowId, title){
+	return new Promise((resolve) => {
+		chrome.tabGroups.query({ windowId: windowId, title: title }, function (result) {
+            resolve(result[0].id);
+		});
+	});
+}
+
+
+async function moveToWorkspace(tab, toWindow, wSId){
+	getGroups(toWindow.id, wSId)
+		.then(groupId => {
+			chrome.tabs.group({tabIds: tab.tabId, groupId: groupId}, function(grup){console.log("added grub\n"+grup)});
+		})
 }
 
 //Function that's responsible for whole logic - it gets all opened windows and moves the tab to other window.
-async function moveToFirstPosition() {
-	chrome.windows.getAll({}, function (windows) {
+async function leapTab(wKSId) {
+	chrome.windows.getAll({}, async function (windows) {
 		for (var i = 0; i < windows.length; i++) {
-			var currentWindow = windows[i];
-			var isActive = currentWindow.focused;
-	  
-			if (!isActive) {
-				console.log("Values...\n\ntabId = " + tabId + "\nwindowId = " + windowId + "\n\n")
-				chrome.tabs.move(tabId,{index: -1,windowId:currentWindow.id}); //Moving tab at last position.
+			if (windows[i].id!=data.windowId) {
+				 moveToWorkspace(data, windows[i], wKSId);
 				break;	//If moved - end of work, job done.
 			}
 		}
 	});
 }
 
-//Setting required event listeners.
 chrome.tabs.onActivated.addListener(setVariables);
-chrome.action.onClicked.addListener(moveToFirstPosition);
-
+chrome.storage.onChanged.addListener(function(changes){
+    leapTab(changes.workspaceId.newValue);
+    });
