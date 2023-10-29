@@ -5,23 +5,37 @@ var data={};
 async function setVariables(activeInfo){	
     data.tabId=activeInfo.tabId;
     data.windowId=activeInfo.windowId;
+	chrome.tabs.get(data.tabId, function(tab){
+		data.groupId=tab.groupId;
+	});
 }
 
 
 async function getGroups(windowId, title){
 	return new Promise((resolve) => {
 		chrome.tabGroups.query({ windowId: windowId, title: title }, function (result) {
-            resolve(result[0].id);
+            resolve(result);
 		});
 	});
 }
 
+async function collapseNonActive(){
+	getGroups(data.windowId)
+		.then(result => {
+			for (var i = 0; i < result.length; i++) {
+				if (result[i].id!=data.groupId) {
+					 chrome.tabGroups.update(result[i].id, {collapsed: true});
+					 console.log("collapsed: " + result[i].title);
+				}
+			}
+		});
+}
 
 async function moveToWorkspace(tab, toWindow, wSId){
 	getGroups(toWindow.id, wSId)
-		.then(groupId => {
-			chrome.tabs.group({tabIds: tab.tabId, groupId: groupId});
-		})
+		.then(result => {
+			chrome.tabs.group({tabIds: tab.tabId, groupId: result[0].id});
+		});
 }
 
 //Function that's responsible for whole logic - it gets all opened windows and moves the tab to other window.
@@ -36,7 +50,10 @@ async function leapTab(wKSId) {
 	});
 }
 
-chrome.tabs.onActivated.addListener(setVariables);
+chrome.tabs.onActivated.addListener(function(activeInfo){
+	setVariables(activeInfo);
+	setTimeout(collapseNonActive, 100);
+});
 chrome.storage.onChanged.addListener(function(changes){
     leapTab(changes.workspaceId.newValue);
     });
