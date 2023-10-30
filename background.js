@@ -13,7 +13,7 @@ async function setVariables(activeInfo){
 	});
 }
 
-
+//Get a list of groups with specified windowId or/and title. 
 async function getGroups(windowId, title){
 	return new Promise((resolve) => {
 		chrome.tabGroups.query({ windowId: windowId, title: title }, function (result) {
@@ -22,6 +22,7 @@ async function getGroups(windowId, title){
 	});
 }
 
+//Collapses all group excluding the active tab's group. 
 async function collapseNonActive(){
 	getGroups(data.windowId)
 		.then(result => {
@@ -33,6 +34,7 @@ async function collapseNonActive(){
 		});
 }
 
+//Moving a tab to specified groupId, so to given window and group.
 async function moveToWorkspace(tab, toWindow, wSId){
 	getGroups(toWindow.id, wSId)
 		.then(result => {
@@ -52,15 +54,18 @@ async function leapTab(wKSId) {
 	});
 }
 
+//Updating data on switching tabs and collapsing other, non-active groups. 
 chrome.tabs.onActivated.addListener(function(activeInfo){
 	setVariables(activeInfo);
 	setTimeout(collapseNonActive, 100);
 });
 
+//Automatically moving a new tab to last active group.
 chrome.tabs.onCreated.addListener(function(newTab){
 	chrome.tabs.group({tabIds: newTab.id, groupId: data.groupId});
 })
 
+//Moving a tab to other window's group when storage is changed (when button is clicked).
 chrome.storage.onChanged.addListener(function(changes){
     leapTab(changes.workspaceId.newValue);
 	chrome.storage.session.set({workspaceId: ""});
