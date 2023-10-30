@@ -13,15 +13,19 @@ Download the repository to a folder and load the folder to you browser's extensi
 
 ## Usage
 
-#### Extension pop-up  
+### Extension pop-up  
 
 After clicking on an extension icon pop-up opens. A user can choose a group to which the tab is to be moved.  
 The tab is current active tab and it is moved to the chosen group, to basically "other" window.   
 At this point the extension supports two opened windows because the tab is moved to first not-current window but over-two-windows-support is to be developed.
 
-#### New tabs automatically in active group.
+### New tabs automatically in active group.
 
-#### Collapsing groups
+When new tab is opened, it is moved to previous tab's group so if you are in "Basic" group and you open new tab, it is moved to "Basic" group. In combination with Collapsing groups feature it works amazingly well and everything is on its place. 
+
+### Collapsing groups
+
+On active tab change, the extension gets the tab's ```groupId``` and collapses every other group so you can clearly see the most important tabs - current used group's tabs.
 
 ## Contributing
 
