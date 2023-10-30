@@ -1,9 +1,9 @@
-# leap
+# **leap**
 
 Leap is a chromium extension helping with organizing browser tabs and groups on more than one window.  
 Currently the extension is avaible on Microsoft Edge and Google Chrome.
 
-## Installation
+## **Installation**
 
 Download the repository to a folder and load the folder to you browser's extensions.  
 
@@ -11,7 +11,7 @@ Download the repository to a folder and load the folder to you browser's extensi
 2. ```Load unpacked.```  
 3. ```Turn it on.```
 
-## Usage
+## **Usage**
 
 ### Extension pop-up  
 
@@ -27,13 +27,13 @@ When new tab is opened, it is moved to previous tab's group so if you are in "Ba
 
 On active tab change, the extension gets the tab's ```groupId``` and collapses every other group so you can clearly see the most important tabs - current used group's tabs.
 
-## Contributing
+## **Contributing**
 
 Pull requests are welcome. For major changes, please open an issue first  
 to discuss what you would like to change.  
   
 Please make sure to update tests as appropriate.
 
-## License
+## **License**
 
 [MIT]
