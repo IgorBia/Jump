@@ -19,6 +19,8 @@ After clicking on an extension icon pop-up opens. A user can choose a group to w
 The tab is current active tab and it is moved to the chosen group, to basically "other" window.   
 At this point the extension supports two opened windows because the tab is moved to first not-current window but over-two-windows-support is to be developed.
 
+![alt text](https://github.com/IgorBia/leap/blob/README/popup.png?raw=true)
+
 ### New tabs automatically in active group.
 
 When new tab is opened, it is moved to previous tab's group so if you are in "Basic" group and you open new tab, it is moved to "Basic" group. In combination with Collapsing groups feature it works amazingly well and everything is on its place. 
