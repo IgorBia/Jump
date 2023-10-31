@@ -19,7 +19,10 @@ After clicking on an extension icon pop-up opens. A user can choose a group to w
 The tab is current active tab and it is moved to the chosen group, to basically "other" window.   
 At this point the extension supports two opened windows because the tab is moved to first not-current window but over-two-windows-support is to be developed.
 
-![alt text](https://github.com/IgorBia/leap/blob/README/readMeImages/popup.png?raw=true)
+<p align="center">
+  <img src="https://github.com/IgorBia/leap/blob/README/readMeImages/popup.png?raw=true" />
+</p>
+
 
 ### New tabs automatically in active group.
 
@@ -33,17 +36,18 @@ When new tab is opened, it is moved to previous tab's group so if you are in "Ba
 
 On active tab change, the extension gets the tab's ```groupId``` and collapses every other group so you can clearly see the most important tabs - current used group's tabs.
 
-![alt text](https://github.com/IgorBia/leap/blob/README/readMeImages/screenshot1.png?raw=true)
+<p align="center">
+  <img src="https://github.com/IgorBia/leap/blob/README/readMeImages/screenshot1.png?raw=true" />
+</p>
 
-![alt text](https://github.com/IgorBia/leap/blob/README/readMeImages/screenshot2.png?raw=true)
+<p align="center">
+  <img src="https://github.com/IgorBia/leap/blob/README/readMeImages/screenshot2.png?raw=true" />
+</p>
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first  
-to discuss what you would like to change.  
-  
-Please make sure to update tests as appropriate.
+You can contribute to code, the prefered way is to contact me first and talk about your idea. We'll disscuss it and hopefully colaborate successfully.
 
 ## License
 
-[MIT](https://en.wikipedia.org/wiki/MIT_License)
+The project is licensed under [MIT LICENSE](https://en.wikipedia.org/wiki/MIT_License).
