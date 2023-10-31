@@ -11,6 +11,10 @@ Download the repository to a folder and load the folder to you browser's extensi
 2. ```Load unpacked.```  
 3. ```Turn it on.```
 
+<p align="right">
+  <img src="https://github.com/IgorBia/leap/blob/README/readMeImages/installation.png?raw=true" />
+</p>
+
 ## Usage
 
 ### Extension pop-up  
@@ -19,7 +23,7 @@ After clicking on an extension icon pop-up opens. A user can choose a group to w
 The tab is current active tab and it is moved to the chosen group, to basically "other" window.   
 At this point the extension supports two opened windows because the tab is moved to first not-current window but over-two-windows-support is to be developed.
 
-<p align="center">
+<p align="right">
   <img src="https://github.com/IgorBia/leap/blob/README/readMeImages/popup.png?raw=true" />
 </p>
 
