@@ -27,6 +27,10 @@ When new tab is opened, it is moved to previous tab's group so if you are in "Ba
 
 On active tab change, the extension gets the tab's ```groupId``` and collapses every other group so you can clearly see the most important tabs - current used group's tabs.
 
+![alt text](https://github.com/IgorBia/leap/blob/README/screenshot1.png?raw=true)
+
+![alt text](https://github.com/IgorBia/leap/blob/README/screenshot2.png?raw=true)
+
 ## **Contributing**
 
 Pull requests are welcome. For major changes, please open an issue first  
