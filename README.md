@@ -11,7 +11,7 @@ Download the repository to a folder and load the folder to you browser's extensi
 2. ```Load unpacked.```  
 3. ```Turn it on.```
 
-<p align="right">
+<p align="center">
   <img src="https://github.com/IgorBia/leap/blob/README/readMeImages/installation.png?raw=true" />
 </p>
 
